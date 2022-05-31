@@ -10,26 +10,22 @@
 </template>
 
 <script>
-    // import toggleMixin from '@/mixins/toggleMixin'
+    import { useToggle } from '@/hooks/toggle'
+    import { watch } from 'vue'
 
     export default {
         props: {
             recipe: Object
         },
-        // mixins: [toggleMixin],
-        data() {
+        setup(props) {
+            const {visible, toggle} = useToggle()
+
+            watch(() => props.recipe, () => {
+                visible.value = false
+            })
+
             return {
-                visible: false
-            }
-        },
-        methods: {
-            toggle() {
-                this.visible = !this.visible
-            }
-        },
-        watch: {
-            recipe() {
-                this.visible = false
+                visible, toggle
             }
         }
     }
