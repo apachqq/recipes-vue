@@ -20,8 +20,8 @@
 </template>
 
 <script>
-    // import toggleMixin from '@/mixins/toggleMixin'
-    import { ref, reactive, computed } from 'vue'
+    import { useToggle } from '@/hooks/toggle'
+    import { useForm } from '@/hooks/form'
 
     export default {
         props: {
@@ -30,64 +30,12 @@
                 required: true
             }
         },
-
-        // mixins: [toggleMixin],
-
         setup(props) {
-            const visible = ref(true)
-            const form = reactive({
-                title: '',
-                description: ''
-            })
-
-            const submit = () => {
-                const recipe = {
-                    title: form.title.trim(),
-                    description: form.description.trim(),
-                    id: Date.now().toString()
-                }
-                form.title = form.description = ''
-                props.onAdd(recipe)
-            }
-
-            const isValid = computed(() => {
-                return form.title.trim() && form.description.trim()
-            })
-
-            const toggle = () => {
-                visible.value = !visible.value
-            }
-
             return {
-                visible, toggle, form, submit, isValid
+                ...useForm(props),
+                ...useToggle()
             }
-        },
-        // data() {
-        //     return {
-        //         title: '',
-        //         description: '',
-        //         // visible: true
-        //     }
-        // },
-        // methods: {
-        // toggle() {
-        //     this.visible = !this.visible
-        // },
-        // submit() {
-        //     const recipe = {
-        //         title: this.title.trim(),
-        //         description: this.description.trim(),
-        //         id: Date.now().toString()
-        //     }
-        //     this.title = this.description = ''
-        //     this.onAdd(recipe)
-        // }
-        // },
-        // computed: {
-        //     isValid() {
-        //         return this.title.trim() && this.description.trim()
-        //     }
-        // }
+        }
     }
 </script>
 
