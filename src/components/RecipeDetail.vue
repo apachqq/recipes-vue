@@ -10,20 +10,23 @@
 </template>
 
 <script>
+    import toggleMixin from '@/mixins/toggleMixin'
+
     export default {
         props: {
             recipe: Object
         },
-        data() {
-            return {
-                visible: false
-            }
-        },
-        methods: {
-            toggle() {
-                this.visible = !this.visible
-            }
-        },
+        mixins: [toggleMixin],
+        // data() {
+        //     return {
+        //         visible: false
+        //     }
+        // },
+        // methods: {
+        //     toggle() {
+        //         this.visible = !this.visible
+        //     }
+        // },
         watch: {
             recipe() {
                 this.visible = false
