@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <add-recipe></add-recipe>
+        <add-recipe :onAdd="addRecipe"></add-recipe>
 
         <div class="columns">
-            <recipe-list></recipe-list>
-            <recipe-detail></recipe-detail>
+            <recipe-list @select="selectRecipe" :recipes="recipes"></recipe-list>
+            <recipe-detail :recipe="current"></recipe-detail>
         </div>
     </div>
 </template>
@@ -15,17 +15,21 @@
     import RecipeList from '@/components/RecipeList'
 
     export default {
-        name: 'app',
         data() {
             return {
-                recipes: []
+                recipes: [],
+                current: null
             }
         },
-        components: {
-            AddRecipe,
-            RecipeList,
-            RecipeDetail
-        }
+        methods: {
+            addRecipe(recipe) {
+                this.recipes.push(recipe)
+            },
+            selectRecipe(id) {
+                this.current = this.recipes.find(r => r.id === id)
+            }
+        },
+        components: {AddRecipe, RecipeList, RecipeDetail}
     }
 </script>
 

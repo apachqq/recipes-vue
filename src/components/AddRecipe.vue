@@ -21,6 +21,12 @@
 
 <script>
     export default {
+        props: {
+            onAdd: {
+                type: Function,
+                required: true
+            }
+        },
         data() {
             return {
                 title: '',
@@ -32,14 +38,15 @@
             toggle() {
                 this.visible = !this.visible
             },
-            // submit() {
-            //     const recipe = {
-            //         title: this.title.trim(),
-            //         description: this.description.trim(),
-            //         id: Date.now().toString()
-            //     }
-            //     this.title = this.description = ''
-            // }
+            submit() {
+                const recipe = {
+                    title: this.title.trim(),
+                    description: this.description.trim(),
+                    id: Date.now().toString()
+                }
+                this.title = this.description = ''
+                this.onAdd(recipe)
+            }
         },
         computed: {
             isValid() {

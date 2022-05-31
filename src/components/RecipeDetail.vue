@@ -1,16 +1,20 @@
 <template>
     <div class="detail">
-        <div class="recipe">
-            <h2>Название рецепта</h2>
+        <div class="recipe" v-if="recipe">
+            <h2>{{ recipe.title }}</h2>
             <a href="#">Показать</a>
-            <p>Описание рецепта</p>
+            <p>{{ recipe.description }}</p>
             <button class="btn remove">Удалить</button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {}
+    export default {
+        props: {
+            recipe: Object
+        }
+    }
 </script>
 
 <style scoped>
