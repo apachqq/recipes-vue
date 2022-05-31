@@ -1,5 +1,5 @@
 <template>
-    <div class="list">
+    <div class="list" :class="{empty: recipes.length === 0}">
         <div v-if="recipes.length">
             <div
                     class="card"

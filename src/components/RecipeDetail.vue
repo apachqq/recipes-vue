@@ -2,8 +2,8 @@
     <div class="detail">
         <div class="recipe" v-if="recipe">
             <h2>{{ recipe.title }}</h2>
-            <a href="#">Показать</a>
-            <p>{{ recipe.description }}</p>
+            <a href="#" @click.prevent="toggle">{{ visible ? 'Скрыть' : 'Показать' }}</a>
+            <p v-if="visible">{{ recipe.description }}</p>
             <button class="btn remove">Удалить</button>
         </div>
     </div>
@@ -13,6 +13,21 @@
     export default {
         props: {
             recipe: Object
+        },
+        data() {
+            return {
+                visible: false
+            }
+        },
+        methods: {
+            toggle() {
+                this.visible = !this.visible
+            }
+        },
+        watch: {
+            recipe() {
+                this.visible = false
+            }
         }
     }
 </script>
