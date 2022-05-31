@@ -10,11 +10,10 @@
 </template>
 
 <script>
-    export default {
-    }
+    export default {}
 </script>
 
-<style>
+<style scoped>
     .recipe {
         display: flex;
         flex-direction: column;
@@ -22,10 +21,12 @@
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+
     .recipe p {
         font-size: .8rem;
         margin-bottom: .5rem;
     }
+
     .recipe a, .recipe h2 {
         margin-bottom: .5rem;
     }

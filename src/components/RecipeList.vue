@@ -11,11 +11,10 @@
 </template>
 
 <script>
-    export default {
-    }
+    export default {}
 </script>
 
-<style>
+<style scoped>
     .card {
         border-bottom: 1px solid #eee;
         padding: 1rem;
@@ -23,17 +22,21 @@
         cursor: pointer;
         background: #fff;
     }
+
     .empty {
         padding: 1rem;
-        background: #fff!important;
+        background: #fff !important;
     }
+
     .card-title {
         padding: 1rem;
         text-align: center;
     }
+
     .card:hover {
         background: #eee;
     }
+
     .list {
         background: #fffeee;
     }
