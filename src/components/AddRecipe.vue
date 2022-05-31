@@ -3,10 +3,10 @@
         <h1>Добавить рецепт</h1>
         <div v-if="visible">
             <div class="input">
-                <input type="text" placeholder="Название рецепта" v-model="title">
+                <input type="text" placeholder="Название рецепта" v-model="form.title">
             </div>
             <div class="input">
-                <input type="text" placeholder="Описание рецепта" v-model="description">
+                <input type="text" placeholder="Описание рецепта" v-model="form.description">
             </div>
         </div>
 
@@ -21,7 +21,7 @@
 
 <script>
     // import toggleMixin from '@/mixins/toggleMixin'
-    import {ref} from 'vue'
+    import { ref, reactive, computed } from 'vue'
 
     export default {
         props: {
@@ -33,43 +33,61 @@
 
         // mixins: [toggleMixin],
 
-        setup() {
+        setup(props) {
             const visible = ref(true)
+            const form = reactive({
+                title: '',
+                description: ''
+            })
+
+            const submit = () => {
+                const recipe = {
+                    title: form.title.trim(),
+                    description: form.description.trim(),
+                    id: Date.now().toString()
+                }
+                form.title = form.description = ''
+                props.onAdd(recipe)
+            }
+
+            const isValid = computed(() => {
+                return form.title.trim() && form.description.trim()
+            })
 
             const toggle = () => {
                 visible.value = !visible.value
             }
 
             return {
-                visible, toggle
+                visible, toggle, form, submit, isValid
             }
         },
-        data() {
-            return {
-                title: '',
-                description: '',
-                // visible: true
-            }
-        },
-        methods: {
-            // toggle() {
-            //     this.visible = !this.visible
-            // },
-            submit() {
-                const recipe = {
-                    title: this.title.trim(),
-                    description: this.description.trim(),
-                    id: Date.now().toString()
-                }
-                this.title = this.description = ''
-                this.onAdd(recipe)
-            }
-        },
-        computed: {
-            isValid() {
-                return this.title.trim() && this.description.trim()
-            }
-        }
+        // data() {
+        //     return {
+        //         title: '',
+        //         description: '',
+        //         // visible: true
+        //     }
+        // },
+        // methods: {
+        // toggle() {
+        //     this.visible = !this.visible
+        // },
+        // submit() {
+        //     const recipe = {
+        //         title: this.title.trim(),
+        //         description: this.description.trim(),
+        //         id: Date.now().toString()
+        //     }
+        //     this.title = this.description = ''
+        //     this.onAdd(recipe)
+        // }
+        // },
+        // computed: {
+        //     isValid() {
+        //         return this.title.trim() && this.description.trim()
+        //     }
+        // }
     }
 </script>
 
