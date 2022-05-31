@@ -4,7 +4,10 @@
 
         <div class="columns">
             <recipe-list @select="selectRecipe" :recipes="recipes"></recipe-list>
-            <recipe-detail :recipe="current"></recipe-detail>
+            <recipe-detail
+                    :recipe="current"
+                    @remove="removeRecipe"
+            ></recipe-detail>
         </div>
     </div>
 </template>
@@ -27,6 +30,10 @@
             },
             selectRecipe(id) {
                 this.current = this.recipes.find(r => r.id === id)
+            },
+            removeRecipe(id) {
+                this.current = null
+                this.recipes = this.recipes.filter(r => r.id !== id)
             }
         },
         components: {AddRecipe, RecipeList, RecipeDetail}

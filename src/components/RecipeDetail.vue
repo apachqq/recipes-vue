@@ -4,7 +4,7 @@
             <h2>{{ recipe.title }}</h2>
             <a href="#" @click.prevent="toggle">{{ visible ? 'Скрыть' : 'Показать' }}</a>
             <p v-if="visible">{{ recipe.description }}</p>
-            <button class="btn remove">Удалить</button>
+            <button class="btn remove" @click="$emit('remove', recipe.id)">Удалить</button>
         </div>
     </div>
 </template>
