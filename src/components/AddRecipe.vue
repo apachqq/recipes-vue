@@ -20,7 +20,8 @@
 </template>
 
 <script>
-    import toggleMixin from '@/mixins/toggleMixin'
+    // import toggleMixin from '@/mixins/toggleMixin'
+    import {ref} from 'vue'
 
     export default {
         props: {
@@ -29,7 +30,20 @@
                 required: true
             }
         },
-        mixins: [toggleMixin],
+
+        // mixins: [toggleMixin],
+
+        setup() {
+            const visible = ref(true)
+
+            const toggle = () => {
+                visible.value = !visible.value
+            }
+
+            return {
+                visible, toggle
+            }
+        },
         data() {
             return {
                 title: '',
